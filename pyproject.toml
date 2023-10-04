@@ -7,6 +7,9 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
 discord = "^2.3.2"
+pymongo = "^4.5.0"
+fpdf = "^1.7.2"
+pytz = "^2023.3.post1"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md
