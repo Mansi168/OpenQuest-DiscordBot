@@ -1,0 +1,59 @@
+# Automate Verification with Discord Bot
+
+[![GitHub License](https://img.shields.io/github/license/your-username/your-repo)](https://github.com/your-username/your-repo/blob/main/LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![Discord API](https://img.shields.io/badge/Discord%20API-v2-green)](https://discordpy.readthedocs.io/en/stable/)
+
+Welcome to the Automate Verification Discord Bot repository! 🤖
+
+Are you tired of manually verifying participant entries for challenges like 30 days of code, code-everyday, or open-source-september? Say goodbye to time-consuming verification processes and hello to automation with our Discord bot!
+
+## Problem Statement
+
+Scaler frequently hosts challenges on its Discord server, where participants need to post their daily progress on Discord and/or share it on Twitter or LinkedIn. The current manual verification process is time-consuming for admins and Scaler stars. It's time to make the verification process faster and more efficient using a Discord bot.
+
+**Important Note:** This problem statement is open-ended, allowing you to innovate and create a Discord bot that utilizes the Discord API to automate various verification tasks.
+
+## Features and Ideas
+
+Our Discord bot can assist with automating the verification process and offer several features, including:
+
+1. **Daily Progress Tracking:** Participants can tag the bot or use a specific bot command when posting on Discord, linking their tweets or LinkedIn posts. The bot will record the user's entry for the day.
+
+2. **Automatic Disqualification:** If a user fails to make a daily post, the bot will automatically mark them as ineligible for rewards.
+
+3. **Format Verification:** The bot can check the format of tweets or LinkedIn posts to ensure they meet the challenge's requirements (e.g., proper hashtags, attached screenshots). It will also keep track of a participant's streak.
+
+4. **Eligibility Tags:** After the challenge ends, moderators can filter entries based on tags set by the bot, making it easy to distinguish between eligible and ineligible participants.
+
+5. **Effortless Rewards Distribution:** The bot can include a feature to distribute tokens to eligible participants with a single click, provided the bot has the necessary permissions.
+
+6. **Export to PDF or Doc:** Generate and share a list of eligible participants in Discord, simplifying the reward distribution process.
+
+## Key Benefits
+
+By using this Discord bot, you'll experience several key benefits:
+
+- **Time and Effort Savings:** Mods and admins can say goodbye to time-consuming manual verifications and focus on other important tasks.
+
+- **Faster Reward Delivery:** Eligible participants can receive their rewards more quickly, enhancing their experience and satisfaction.
+
+- **Streamlined Process:** The bot simplifies the entire verification and reward distribution process, making it efficient and hassle-free.
+
+## Tech Stack
+
+Our Discord bot leverages the following technologies:
+
+- **Python 3.8+:** The core programming language for bot development.
+- **Discord API:** Utilizing Discord API v2 to interact with the Discord server and messages.
+
+## Get Started
+
+Ready to streamline your verification process and reward distribution? Clone this repository, follow our setup instructions, and start using the Automate Verification Discord Bot today!
+
+### Installation
+
+1. Clone this repository to your local machine.
+
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
