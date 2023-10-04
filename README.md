@@ -10,9 +10,7 @@ Are you tired of manually verifying participant entries for challenges like 30 d
 
 ## Problem Statement
 
-Scaler frequently hosts challenges on its Discord server, where participants need to post their daily progress on Discord and/or share it on Twitter or LinkedIn. The current manual verification process is time-consuming for admins and Scaler stars. It's time to make the verification process faster and more efficient using a Discord bot.
-
-**Important Note:** This problem statement is open-ended, allowing you to innovate and create a Discord bot that utilizes the Discord API to automate various verification tasks.
+If you are hosting challenges on Discord server, where participants need to post their daily progress on Discord and/or share it on Twitter or LinkedIn. The current manual verification process is time-consuming for admins. It's time to make the verification process faster and more efficient using a Discord bot.
 
 ## Features and Ideas
 
@@ -49,11 +47,6 @@ Our Discord bot leverages the following technologies:
 
 ## Get Started
 
-Ready to streamline your verification process and reward distribution? Clone this repository, follow our setup instructions, and start using the Automate Verification Discord Bot today!
+Ready to streamline your verification process and reward distribution? Clone this repository, and start using the Automate Verification Discord Bot today!
 
-### Installation
 
-1. Clone this repository to your local machine.
-
-   ```bash
-   git clone https://github.com/your-username/your-repo.git
