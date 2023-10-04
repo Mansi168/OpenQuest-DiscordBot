@@ -1,4 +1,4 @@
-<h1> Automate Verification with Discord Bot </h1>
+## Automate Verification with Discord Bot
 
 [![GitHub License](https://img.shields.io/github/license/your-username/your-repo)](https://github.com/your-username/your-repo/blob/main/LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
@@ -8,7 +8,7 @@ Welcome to the Automate Verification Discord Bot repository! 🤖
 
 Are you tired of manually verifying participant entries for challenges like 30 days of code, code-everyday, or open-source-september? Say goodbye to time-consuming verification processes and hello to automation with our Discord bot!
 
-<h2>Problem Statement</h2>
+## Problem Statement
 
 Scaler frequently hosts challenges on its Discord server, where participants need to post their daily progress on Discord and/or share it on Twitter or LinkedIn. The current manual verification process is time-consuming for admins and Scaler stars. It's time to make the verification process faster and more efficient using a Discord bot.
 
