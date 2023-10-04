@@ -45,7 +45,7 @@ async def on_message(message):
         # Check if the message is posted within the last 24 hours
             ist = pytz.timezone('Asia/Kolkata')
 
-        # Make one_day_ago a timezone-aware datetime object in UTC
+        # Make one_day_ago a timezone-aware datetime object in IST
             one_day_ago = datetime.now(ist) - timedelta(days=1)
 
         # Convert message.created_at to UTC (assuming Discord timestamps are in UTC)
@@ -65,44 +65,48 @@ async def on_message(message):
               export_to_pdf()
         print(f'hello')
         if linkedin_match:
-                    print(f'hello')
-                    linkedin_link = linkedin_match.group()
-                    post = {"type": "LinkedIn", "link": linkedin_link}
-                    participant_id = message.author.id
-                    try:
-                        update_participant_entry(participant_id, post)
-                        await message.channel.send(f'LinkedIn data inserted for user {participant_id}: {linkedin_link}')
-                    except Exception as e:
-                        print(f'Error inserting LinkedIn data: {e}')
-
+          linkedin_link = linkedin_match.group()
+          post = {"type": "LinkedIn", "link": linkedin_link}
+          participant_id = message.author.id
+          post_added = update_participant_entry(participant_id, post)
+      
+          if post_added:
+              await message.channel.send(f'LinkedIn data inserted for user {participant_id}: {linkedin_link}')
+          else:
+              await message.channel.send(f'You have already posted this LinkedIn link. Please provide a new one.')
+      
         if twitter_match:
-                    print(f'hello')
-                    twitter_link = twitter_match.group()
-                    post = {"type": "Twitter", "link": twitter_link}
-                    participant_id = message.author.id
-                    try:
-                        update_participant_entry(participant_id, post)
-                        await message.channel.send(f'Twitter data inserted for user {participant_id}: {twitter_link}')
-                    except Exception as e:
-                        print(f'Error inserting Twitter data: {e}')
-    # except Exception as e:
-    #     print(f'Error processing message: {e}')
-
+            twitter_link = twitter_match.group()
+            post = {"type": "Twitter", "link": twitter_link}
+            participant_id = message.author.id
+            post_added = update_participant_entry(participant_id, post)
+        
+            if post_added:
+                await message.channel.send(f'Twitter data inserted for user {participant_id}: {twitter_link}')
+            else:
+                await message.channel.send(f'You have already posted this Twitter link. Please provide a new one.')
+        
+  
 def update_participant_entry(participant_id, post):
     try:
-        # Check if the participant document exists in the collection
         existing_participant = collection.find_one({"_id": participant_id})
         if existing_participant:
             entries = existing_participant.get("entries", [])
-            entries.append(post)
-            # Update the participant's document with the new entry
-            collection.update_one({"_id": participant_id}, {"$set": {"entries": entries}})
+            # Check if the post already exists in the entries
+            if post not in entries:
+                entries.append(post)
+                collection.update_one({"_id": participant_id}, {"$set": {"entries": entries}})
+                return True  # Post added successfully
+            else:
+                return False  # Post already exists
         else:
-            # Create a new participant document if it doesn't exist
             new_participant = {"_id": participant_id, "entries": [post]}
             collection.insert_one(new_participant)
+            return True  # Post added successfully
     except Exception as e:
         print(f'Error updating participant entry: {e}')
+        return False  # Post not added due to error
+
 
 
 def export_to_pdf():
