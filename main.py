@@ -6,8 +6,9 @@ import pymongo
 import asyncio
 import re
 from datetime import datetime, timedelta
-from fpdf import FPDF
 import pytz 
+from export import export_to_pdf
+from update_entry import update_participant_entry
 
 client = discord.Client(intents=discord.Intents.all())
 
@@ -63,76 +64,43 @@ async def on_message(message):
             if streaks[user_id] ==30:
             # User successfully completed the challenge, handle the completion here
               print(f'User {user_id} completed the 30-day challenge!')
-              export_to_pdf()
-        print(f'hello')
-        hashtag_pattern = r'#\w+'
-        hashtags = re.findall(hashtag_pattern, message_content)
+              export_to_pdf(streaks)
+        
+            hashtag_pattern = r'#\w+'
+            hashtags = re.findall(hashtag_pattern, message_content)
         
         # Check if the message contains a screenshot attachment
-        has_screenshot = any(attachment.width and attachment.height for attachment in message.attachments)
+            has_screenshot = any(attachment.width and attachment.height for attachment in message.attachments)
 
         # Validate format (for example: check for hashtags and screenshot)
-        if not hashtags or not has_screenshot:
+            if not hashtags or not has_screenshot:
             # Warn the user about incorrect format
-            user_mention=message.author
-            await message.channel.send(f"{user_mention.mention}, please make sure to include proper hashtags and attach a screenshot.")
+              user_mention=message.author
+              await message.channel.send(f"Hello{user_mention.mention}, please make sure to include proper hashtags and attach a screenshot.")
 
         if linkedin_match:
           linkedin_link = linkedin_match.group()
           post = {"type": "LinkedIn", "link": linkedin_link}
           participant_id = message.author.id
-          post_added = update_participant_entry(participant_id, post)
+          post_added = update_participant_entry(participant_id, post,collection)
       
           if post_added:
-              await message.channel.send(f'LinkedIn data inserted for user {participant_id}: {linkedin_link}')
+              await message.channel.send(f"Hello {message.author.mention}, Thank you for participating in the challenge, make sure to maintain your streak and get a chance to win exciting rewards😎")
           else:
-              await message.channel.send(f'You have already posted this LinkedIn link. Please provide a new one.')
+              await message.channel.send(f'Hello {message.author.mention}, you have already posted this LinkedIn link. Please provide a new one.')
       
         if twitter_match:
             twitter_link = twitter_match.group()
             post = {"type": "Twitter", "link": twitter_link}
             participant_id = message.author.id
-            post_added = update_participant_entry(participant_id, post)
+            post_added = update_participant_entry(participant_id, post,collection)
         
             if post_added:
-                await message.channel.send(f'Twitter data inserted for user {participant_id}: {twitter_link}')
+                await message.channel.send(f"Hello {message.author.mention}, Thank you for participating in the challenge, make sure to maintain your streak and get a chance to win exciting rewards😎")
             else:
-                await message.channel.send(f'You have already posted this Twitter link. Please provide a new one.')
+                await message.channel.send(f'Hello {message.author.mention}, you have already posted this Twitter link. Please provide a new one.')
         
   
-def update_participant_entry(participant_id, post):
-    try:
-        existing_participant = collection.find_one({"_id": participant_id})
-        if existing_participant:
-            entries = existing_participant.get("entries", [])
-            # Check if the post already exists in the entries
-            if post not in entries:
-                entries.append(post)
-                collection.update_one({"_id": participant_id}, {"$set": {"entries": entries}})
-                return True  # Post added successfully
-            else:
-                return False  # Post already exists
-        else:
-            new_participant = {"_id": participant_id, "entries": [post]}
-            collection.insert_one(new_participant)
-            return True  # Post added successfully
-    except Exception as e:
-        print(f'Error updating participant entry: {e}')
-        return False  # Post not added due to error
-
-
-
-def export_to_pdf():
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="List of Eligible Participants", ln=True, align='C')
-
-    for user_id in streaks:
-      if streaks[user_id] ==30:
-        pdf.cell(200, 10, txt=f"User ID: {user_id}, Streak: {streaks[user_id]}", ln=True, align='L')
-
-    pdf.output("eligible_participants.pdf")
 
 for user_id, streak_count in streaks.items():
     print(f"User ID: {user_id}, Streak: {streak_count}")    
