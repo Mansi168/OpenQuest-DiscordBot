@@ -37,6 +37,7 @@ async def on_message(message):
         message_content = message.content
         linkedin_match = re.search(linkedin_pattern, message_content)
         twitter_match = re.search(twitter_pattern, message_content)
+        
         if linkedin_match or twitter_match:
             user_id = message.author.id
             if user_id not in streaks:
@@ -64,6 +65,18 @@ async def on_message(message):
               print(f'User {user_id} completed the 30-day challenge!')
               export_to_pdf()
         print(f'hello')
+        hashtag_pattern = r'#\w+'
+        hashtags = re.findall(hashtag_pattern, message_content)
+        
+        # Check if the message contains a screenshot attachment
+        has_screenshot = any(attachment.width and attachment.height for attachment in message.attachments)
+
+        # Validate format (for example: check for hashtags and screenshot)
+        if not hashtags or not has_screenshot:
+            # Warn the user about incorrect format
+            user_mention=message.author
+            await message.channel.send(f"{user_mention.mention}, please make sure to include proper hashtags and attach a screenshot.")
+
         if linkedin_match:
           linkedin_link = linkedin_match.group()
           post = {"type": "LinkedIn", "link": linkedin_link}
