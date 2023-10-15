@@ -48,7 +48,7 @@ async def on_message(message):
                 await message.channel.send(ranki.rank)
 
         if message.content.startswith('!get_pdf') and message.author.id == message.guild.owner.id:
-          users_data = streaks_collection.find({"streak": 2})
+          users_data = streaks_collection.find({"streak": 30})
           pdf_filename = export_to_pdf(users_data)
           await message.channel.send("Pdf has been exported")
 

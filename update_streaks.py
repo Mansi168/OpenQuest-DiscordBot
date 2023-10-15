@@ -9,7 +9,7 @@ def update_streaks(streaks_collection,message_time,user_name,participant):
     {"_id": user_name, "streak": 1,
     "last_post": message_time})
 
-    if participant and (message_time-participant.get("last_post").astimezone(ist)).total_seconds() <= 100:
+    if participant and (message_time-participant.get("last_post").astimezone(ist)).total_seconds()/60 >= 1440:
 
       streaks_collection.update_one(
     {"_id": user_name},
