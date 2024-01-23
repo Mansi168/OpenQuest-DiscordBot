@@ -1,4 +1,3 @@
-  from fpdf import FPDF
   from reportlab.pdfgen import canvas
 
 
