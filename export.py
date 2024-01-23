@@ -1,7 +1,6 @@
-  from reportlab.pdfgen import canvas
+from reportlab.pdfgen import canvas
 
-
-  def export_to_pdf(users_data):
+def export_to_pdf(users_data):
 
     pdf_filename = "streak_report.pdf"
     c = canvas.Canvas(pdf_filename)
